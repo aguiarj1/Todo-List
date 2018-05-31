@@ -1,13 +1,30 @@
+//AUTHOR: Joel Aguiar
+//FILENAME: TodoItem.java
+//DATE: 5/30/18
+//REVISION HISTORY: first draft
+//REFERENCES: none
+//DESRIPTION: A TodoItem represents a task.  
+//FUNCTIONALITY: A TodoItem has several basic  getters and setters. It also
+//		has a method, providerecord, that gets all the data to save
+//		in a file. 
+//STATES: 	n/a
+//DEPENDANCIES: It has no dependancies. 
+//LEGAL INPUTS: Each method has specific legal inputs. There is no error
+//		checking to ensure only legal input.  
+//ASSUMPTIONS:  n/a
+//IMPLEMENTATION INVARIANTS: n/a 
+
+
 import java.util.Date; 
 
 public class TodoItem{
-	private static int idCount = 0; //provided by program 
-	public int id; //provided by program
-	public String description; //provided by user
-       	public Date timestamp; //provided by program 
-	public Date dueDate;  //provided by user
-	public String status; //provided by user 
-	public int parent; //provded by user 
+	private static int idCount = 0; //id count of todoItem
+	public int id; //id of a specific TodoTiem
+	public String description; //description of todo item
+       	public Date timestamp; //when it was inputted 
+	public Date dueDate;  //when todoitem is due
+	public String status; //whehter it is done or not
+	public int parent; //any parent todoitem. 
 
 
 	public TodoItem(String desc, Date d){

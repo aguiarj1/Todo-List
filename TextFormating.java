@@ -1,8 +1,16 @@
+//This class has methods that format text to be displayed in the command line
+
 import java.util.*;
 
 public class TextFormating{
 	
-	//formats a 2d array into a table to be displayed in command line
+	//formats a 2d array into a table to be displayed in command line,
+	//it wraps text when it reaches the limit. 
+	//INPUT: rowSize- an array representing the length of ech of the 
+	//	columns. 
+	//	values - an array representing the text that will be 
+	//	displayed in each row. 
+	//OUTPUT: A formatted string that is displayed as a table 
 	public static String makeTable(int[] rowSize, String[][] values){
 		StringBuilder result = new StringBuilder(); 
 		for(int i=0; i<values.length;i++){

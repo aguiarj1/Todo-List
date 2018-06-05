@@ -1,33 +1,26 @@
-//This class has methods that format text to be displayed in the command line
 
 import java.util.*;
 
+/**
+ * This class has methods that format text to be displayed in the command line
+ * @author Joel Aguiar
+ */
+
 public class TextFormating{
 	
-	//formats a 2d array into a table to be displayed in command line,
-	//it wraps text when it reaches the limit. 
-	//INPUT: rowSize- an array representing the length of ech of the 
-	//	columns. 
-	//	values - an array representing the text that will be 
-	//	displayed in each row. 
-	//OUTPUT: A formatted string that is displayed as a table 
-	public static String makeTable(int[] rowSize, String[][] values){
-		StringBuilder result = new StringBuilder(); 
-		for(int i=0; i<values.length;i++){
-			result.append(processOneRow(rowSize, values[i])); 
-		}
-		return result.toString();
-	}
+	// ******************************************************
+	// Private methods
+	// ******************************************************
 
-	//formats one array into a row. if one of the input strings is to big for
-	//that section it wraps text	
+	//processes one row	
 	private static String processOneRow(int[] rowSize, String[] values){
 		StringBuilder result = new StringBuilder();		
 		processOneRow(rowSize, values, result, false); 
 		return result.toString(); 	
 
 	}
-	
+
+	//recursively processes one row	
 	private static void processOneRow(int[] rowSize, String[] values, StringBuilder result, boolean finished){
 		//stopping case 
 		if(finished){
@@ -63,6 +56,27 @@ public class TextFormating{
                 }
 		return sb.toString(); 
 
+	}
+
+	// ******************************************************
+	// Public methods
+	// ******************************************************
+		
+	/**
+ 	* This method formats a 2d array into a table to be displayed in the command line.
+	* It wraps text when it reaches the limit size for a particular column. 
+	* @param rowSize an array representing the length of ech of the 
+	*	columns. 
+	* @param values - an array representing the text that will be 
+	*	displayed in each row. 
+	* @return A formatted string that is displayed as a table 
+	*/
+	public static String makeTable(int[] rowSize, String[][] values){
+		StringBuilder result = new StringBuilder(); 
+		for(int i=0; i<values.length;i++){
+			result.append(processOneRow(rowSize, values[i])); 
+		}
+		return result.toString();
 	}
 
 }

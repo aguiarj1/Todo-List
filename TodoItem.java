@@ -51,21 +51,36 @@ public class TodoItem{
 // ******************************************************
 
 
+	/**
+ 	* This method gets the ID of the todo item.
+ 	* @return id the id of the todoitem
+ 	*/ 
 	public int getID(){
 		return id; 
 	}	
 	
-	public static void setIdCount(int i){
-		idCount = i; 	
+	/**
+ 	*  This method sets the starting point for the id param.
+ 	*  @param startingID takes a number that is the starting point of id 
+ 	*/ 
+	public static void setIdCount(int startingID){
+		idCount = startingID; 	
 	}
 
-
+	@Override 
 	public String toString(){
 		int[] size = {4,50,60};
 		String[][] val = {{Integer.toString(id),description,dueDate.toString()}};
 		return TextFormating.makeTable(size,val);
 	}
 
+	/**
+ 	* This method provides a string representation of all the fields in the 
+ 	* todo item, so that it can be saved in a text file and easily parsed. It
+ 	* sepeartes all records with "|".
+ 	* @return a String representation of all the records.   
+ 	*
+ 	*/ 	
 	public String provideRecord(){
 		StringBuilder record = new StringBuilder(); 
 		record.append(id);

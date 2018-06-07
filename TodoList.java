@@ -83,8 +83,23 @@ public class TodoList {
 		TodoItem.setIdCount(biggestID); 
 	}
 
-	private void addToLinkedListInOrder(ListItem item){
-
+	private void addToLinkedListInOrder(TodoItem item){
+		if(listLL.size() != 0){
+			//search for the index of the first item that is greater
+			int index = -1; 
+			for(int i =0; i<listLL.size(); i++){
+				if(item.getDueDate().before(listLL.get(i).getDueDate())){
+					index = i; 
+					listLL.add(index, item); 
+					break; 
+				}	
+			}
+			if(index == -1){
+				listLL.addLast(item); 
+			}
+		} else {
+			listLL.add(item); 	
+		}
 
 	}
 
@@ -173,6 +188,10 @@ public class TodoList {
 		for(TodoItem i : list){
 			System.out.print(i.toString()); 
 		}
+		System.out.println("\nLINKED LINST\n"); 
+		for(TodoItem i : listLL){
+			System.out.print(i.toString()); 
+		}		
 
 
 	}

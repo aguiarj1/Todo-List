@@ -3,13 +3,28 @@ import java.util.Date;
 import java.io.*; 
 import java.io.IOException; 
 
-//This is a list of TodoItems and several methods to add, view, and delete from the list
+/**
+ * This class represents a list of TodoItems. This is a list of TodoItems 
+ * and several methods to add, view, and delete from the list
+ * @author Joel Aguiar
+ */
+
 public class TodoList {
+
+// ******************************************************
+// Fields
+// ******************************************************
 	private ArrayList<TodoItem> list; 
+	private LinkedList<TodoItem> listLL; 
 	private final String TodoFilename = "TodoRecords.txt";
        	private File todoFile; 	
 	private final String doneTodoFileName = "done.txt";
 	private File doneFile; 
+
+// ******************************************************
+// Constructors 
+// ******************************************************
+	
 
 	//The constructor. It makes a list and loads data when available. 
 	public TodoList() throws IOException{
@@ -17,6 +32,11 @@ public class TodoList {
 		//load saved Todo Items
 		loadOrCreateFile(); 
 	}
+
+// ******************************************************
+// Public methods
+// ******************************************************
+	
 	//This method creates a file or add the content of a file to TodoList
 	public void loadOrCreateFile() throws IOException{
 		File file = new File(TodoFilename); 

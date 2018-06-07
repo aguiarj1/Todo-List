@@ -14,12 +14,12 @@ public class TodoItem{
 // ******************************************************
 
 	private static int idCount = 0; //id count of todoItem
-	public int id; //id of a specific TodoTiem
-	public String description; //description of todo item
-       	public Date timestamp; //when it was inputted 
-	public Date dueDate;  //when todoitem is due
-	public String status; //whehter it is done or not
-	public int parent; //any parent todoitem. 
+	private int id; //id of a specific TodoTiem
+	private String description; //description of todo item
+       	private Date timestamp; //when it was inputted 
+	private Date dueDate;  //when todoitem is due
+	private String status; //whehter it is done or not
+	private int parent; //any parent todoitem. 
 
 // ******************************************************
 // Constructors
@@ -50,6 +50,14 @@ public class TodoItem{
 // Public methods
 // ******************************************************
 
+
+	/**
+ 	* This method returns the due date. 
+ 	* @return the date that the task is due
+ 	*/	 	
+	public Date getDueDate(){
+		return dueDate; 
+	}
 
 	/**
  	* This method gets the ID of the todo item.

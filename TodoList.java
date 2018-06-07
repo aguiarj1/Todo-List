@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Date; 
 import java.io.*; 
 import java.io.IOException; 
+import java.util.LinkedList; 
 
 /**
  * This class represents a list of TodoItems. This is a list of TodoItems 
@@ -29,16 +30,17 @@ public class TodoList {
 	//The constructor. It makes a list and loads data when available. 
 	public TodoList() throws IOException{
 		list = new ArrayList<TodoItem>(); 
+		listLL = new LinkedList<TodoItem>(); 
 		//load saved Todo Items
 		loadOrCreateFile(); 
 	}
 
 // ******************************************************
-// Public methods
+// Private methods
 // ******************************************************
 	
 	//This method creates a file or add the content of a file to TodoList
-	public void loadOrCreateFile() throws IOException{
+	private void loadOrCreateFile() throws IOException{
 		File file = new File(TodoFilename); 
 		todoFile = file; 
 		boolean b = false; 
@@ -50,6 +52,48 @@ public class TodoList {
 			getRecords(); 
 		}
 	}
+
+
+	//This method read the data from a file and converts them to TodoItems
+	//and adds them to the list
+	private void getRecords() throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(todoFile)); 
+		String st;
+	       	String[] data; 	
+		int biggestID=-1;  
+		//capture each line /todo 
+		while((st = br.readLine()) != null){
+			data = st.split("\\|"); 
+			//create new todoItems and put them in Array
+			//make a new object
+			TodoItem item = new TodoItem(Integer.parseInt(data[0]),
+					data[1], new Date(Long.parseLong(data[2])),
+					new Date(Long.parseLong(data[3])), data[4],
+					Integer.parseInt(data[5])); 
+
+			//add it to arraylist 
+			list.add(item);
+			addToLinkedListInOrder(item);  
+			if(Integer.parseInt(data[0]) > biggestID){
+				biggestID = Integer.parseInt(data[0]); 
+			}
+		}
+		//change the starting ponit of the ID's based on biggest id
+		biggestID++; 
+		TodoItem.setIdCount(biggestID); 
+	}
+
+	private void addToLinkedListInOrder(ListItem item){
+
+
+	}
+
+
+// ******************************************************
+// Public methods
+// ******************************************************
+	
+	
 
 	//This method deletes an item from the list
 	public void done(int n) throws IOException{
@@ -78,33 +122,7 @@ public class TodoList {
 		list.remove(deleteIndex); 
 	}
 
-	//This method read the data from a file and converts them to TodoItems
-	//and adds them to the list
-	public void getRecords() throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(todoFile)); 
-		String st;
-	       	String[] data; 	
-		int biggestID=-1;  
-		//capture each line /todo 
-		while((st = br.readLine()) != null){
-			data = st.split("\\|"); 
-			//create new todoItems and put them in Array
-			//make a new object
-			TodoItem item = new TodoItem(Integer.parseInt(data[0]),
-					data[1], new Date(Long.parseLong(data[2])),
-					new Date(Long.parseLong(data[3])), data[4],
-					Integer.parseInt(data[5])); 
-
-			//add it to arraylist 
-			list.add(item); 
-			if(Integer.parseInt(data[0]) > biggestID){
-				biggestID = Integer.parseInt(data[0]); 
-			}
-		}
-		//change the starting ponit of the ID's based on biggest id
-		biggestID++; 
-		TodoItem.setIdCount(biggestID); 
-	}
+	
 
 
 	//This method writes the data back to the file 

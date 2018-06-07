@@ -15,7 +15,6 @@ public class TodoList {
 // ******************************************************
 // Fields
 // ******************************************************
-	private ArrayList<TodoItem> list; 
 	private LinkedList<TodoItem> listLL; 
 	private final String TodoFilename = "TodoRecords.txt";
        	private File todoFile; 	
@@ -29,7 +28,6 @@ public class TodoList {
 
 	//The constructor. It makes a list and loads data when available. 
 	public TodoList() throws IOException{
-		list = new ArrayList<TodoItem>(); 
 		listLL = new LinkedList<TodoItem>(); 
 		//load saved Todo Items
 		loadOrCreateFile(); 
@@ -72,8 +70,7 @@ public class TodoList {
 					Integer.parseInt(data[5])); 
 
 			//add it to arraylist 
-			list.add(item);
-			addToLinkedListInOrder(item);  
+			listLL.add(item); 
 			if(Integer.parseInt(data[0]) > biggestID){
 				biggestID = Integer.parseInt(data[0]); 
 			}
@@ -115,7 +112,7 @@ public class TodoList {
 		//find objec that matched that ID and return it
 		int deleteIndex =-1;
 	       	int counter = 0; 	
-		for(TodoItem x : list){
+		for(TodoItem x : listLL){
 			if(x.getID()  == n){
 				deleteIndex = counter; 
 			}
@@ -127,14 +124,14 @@ public class TodoList {
 			file.createNewFile(); 
 		} 
 		//append the item to be deleted to the end of the file
-		System.out.println("item deleted: " + list.get(deleteIndex).provideRecord());
+		System.out.println("item deleted: " + listLL.get(deleteIndex).provideRecord());
 		FileWriter fw = new FileWriter(file, true);
-		fw.write(list.get(deleteIndex).provideRecord());
+		fw.write(listLL.get(deleteIndex).provideRecord());
 		fw.write("\n"); 
 		fw.flush(); 
 		fw.close(); 	
 		
-		list.remove(deleteIndex); 
+		listLL.remove(deleteIndex); 
 	}
 
 	
@@ -143,8 +140,8 @@ public class TodoList {
 	//This method writes the data back to the file 
 	public void saveRecords() throws IOException{
 		FileWriter fw = new FileWriter(todoFile, false);
-		for(TodoItem i : list){
-			fw.write(i.provideRecord()); 
+		for(TodoItem i : listLL){
+			fw.write(i.provideRecord());
 			fw.write("\n"); 
 		}
 		fw.flush(); 
@@ -179,16 +176,11 @@ public class TodoList {
 				Integer.parseInt(tempMonth.toString())-1,
 			       	Integer.parseInt(tempDay.toString())); 	
 		TodoItem item = new TodoItem(description, d); 
-		list.add(item);
-
+		addToLinkedListInOrder(item); 
 	}
 	
 	//This method prints out the TodoItems on the list
 	public void view(){
-		for(TodoItem i : list){
-			System.out.print(i.toString()); 
-		}
-		System.out.println("\nLINKED LINST\n"); 
 		for(TodoItem i : listLL){
 			System.out.print(i.toString()); 
 		}		

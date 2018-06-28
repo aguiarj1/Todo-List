@@ -11,10 +11,25 @@ public class Project {
 	// Fields
 	//***************************************************
 	
-	String projectDescription; 
-	Date projectStartDate;
-	Date projectEndDate;
-        Goal goal; 	
+	private String projectDescription; 
+	private Date projectStartDate;
+	private Date projectEndDate;
+        private Goal goal; 
+
+	//***************************************************
+	// Constructors
+	// **************************************************
+
+
+
+	//***************************************************
+	// Public Methods
+	// **************************************************
+	
+	public String getProjectDescription(){
+		return projectDescription; 
+	}
+		
 
 
 }

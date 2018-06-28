@@ -1,0 +1,20 @@
+import java.util.ArrayList; 
+
+public class ProjectList {
+
+	//**************************************************
+	// Fields
+	// *************************************************
+
+	private ArrayList<Project>;
+	private final String projectFileName = "ProjectRecords.txt";
+	private File projectFile;    
+    	private final String doneProjectFileName = "ProjectDone.txt";
+	private File projectDoneFile;
+
+
+
+		
+
+
+}

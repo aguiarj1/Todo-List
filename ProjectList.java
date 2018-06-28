@@ -1,13 +1,13 @@
 import java.util.ArrayList; 
-
+import java.util.LinkedList; 
 public class ProjectList {
 
 	//**************************************************
 	// Fields
 	// *************************************************
 
-	private ArrayList<Project>;
-	private final String projectFileName = "ProjectRecords.txt";
+	private LinkedList<Project> projectList;
+	private final String projectFilename = "ProjectRecords.txt";
 	private File projectFile;    
     	private final String doneProjectFileName = "ProjectDone.txt";
 	private File projectDoneFile;
@@ -19,8 +19,8 @@ public class ProjectList {
 	
 
 	//The constructor. It makes a list and loads data when available. 
-	public TodoList() throws IOException{
-		listLL = new LinkedList<TodoItem>(); 
+	public ProjectList() throws IOException{
+		projectList = new LinkedList<Project>(); 
 		//load saved Todo Items
 		loadOrCreateFile(); 
 	}
@@ -31,8 +31,8 @@ public class ProjectList {
 	
 	//This method creates a file or add the content of a file to TodoList
 	private void loadOrCreateFile() throws IOException{
-		File file = new File(TodoFilename); 
-		todoFile = file; 
+		File file = new File(projectFilename); 
+		projectFile = file; 
 		boolean b = false; 
 		if(!file.exists()){
 			//if file doesn't exist create it
@@ -47,7 +47,7 @@ public class ProjectList {
 	//This method read the data from a file and converts them to TodoItems
 	//and adds them to the list
 	private void getRecords() throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(todoFile)); 
+		BufferedReader br = new BufferedReader(new FileReader(projectFile)); 
 		String st;
 	       	String[] data; 	
 		int biggestID=-1;  
@@ -62,7 +62,7 @@ public class ProjectList {
 					Integer.parseInt(data[5])); 
 
 			//add it to arraylist 
-			listLL.add(item); 
+			projectList.add(item); 
 			if(Integer.parseInt(data[0]) > biggestID){
 				biggestID = Integer.parseInt(data[0]); 
 			}
@@ -73,21 +73,21 @@ public class ProjectList {
 	}
 
 	private void addToLinkedListInOrder(TodoItem item){
-		if(listLL.size() != 0){
+		if(projectList.size() != 0){
 			//search for the index of the first item that is greater
 			int index = -1; 
-			for(int i =0; i<listLL.size(); i++){
-				if(item.getDueDate().before(listLL.get(i).getDueDate())){
+			for(int i =0; i<projectList.size(); i++){
+				if(item.getDueDate().before(projectList.get(i).getDueDate())){
 					index = i; 
-					listLL.add(index, item); 
+					projectList.add(index, item); 
 					break; 
 				}	
 			}
 			if(index == -1){
-				listLL.addLast(item); 
+				projectList.addLast(item); 
 			}
 		} else {
-			listLL.add(item); 	
+			projectList.add(item); 	
 		}
 
 	}
@@ -104,26 +104,26 @@ public class ProjectList {
 		//find objec that matched that ID and return it
 		int deleteIndex =-1;
 	       	int counter = 0; 	
-		for(TodoItem x : listLL){
+		for(TodoItem x : projectList){
 			if(x.getID()  == n){
 				deleteIndex = counter; 
 			}
 			counter++;
 		}
-		File file = new File(doneTodoFileName); 
-		doneFile = file; 
+		File file = new File(doneProjectFileName); 
+		projectDoneFile = file; 
 		if(!file.exists()){
 			file.createNewFile(); 
 		} 
 		//append the item to be deleted to the end of the file
-		System.out.println("item deleted: " + listLL.get(deleteIndex).provideRecord());
+		System.out.println("item deleted: " + projectList.get(deleteIndex).provideRecord());
 		FileWriter fw = new FileWriter(file, true);
-		fw.write(listLL.get(deleteIndex).provideRecord());
+		fw.write(projectList.get(deleteIndex).provideRecord());
 		fw.write("\n"); 
 		fw.flush(); 
 		fw.close(); 	
 		
-		listLL.remove(deleteIndex); 
+		projectList.remove(deleteIndex); 
 	}
 
 	
@@ -131,8 +131,8 @@ public class ProjectList {
 
 	//This method writes the data back to the file 
 	public void saveRecords() throws IOException{
-		FileWriter fw = new FileWriter(todoFile, false);
-		for(TodoItem i : listLL){
+		FileWriter fw = new FileWriter(projectFile, false);
+		for(TodoItem i : projectList){
 			fw.write(i.provideRecord());
 			fw.write("\n"); 
 		}
@@ -173,7 +173,7 @@ public class ProjectList {
 	
 	//This method prints out the TodoItems on the list
 	public void view(){
-		for(TodoItem i : listLL){
+		for(TodoItem i : projectList){
 			System.out.print(i.toString()); 
 		}		
 

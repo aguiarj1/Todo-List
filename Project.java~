@@ -89,6 +89,13 @@ public class Project {
 	@Override 
 	public String toString(){
 		int[] size = {4,50,60};
+		System.out.println("DEBUG id: " + id);
+		if(projectDescription != null){
+			System.out.println("DEBUG project Description: " + projectDescription);
+		}
+		if(projectEndDate != null){
+			System.out.println("DEBUG project End Date: " + projectEndDate.toString()); 	
+		}
 		String[][] val = {{Integer.toString(id),projectDescription,projectEndDate.toString()}};
 		return TextFormating.makeTable(size,val);
 	

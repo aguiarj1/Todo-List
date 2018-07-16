@@ -28,7 +28,6 @@ public class TodoView{
 			} else if(responseArr[0].equals("quit")){
 				//save before quiting to file
 				list.saveRecords(); 
-				plist.saveRecords();
 				break; 
 			} else if(responseArr[0].equals("done")){
 

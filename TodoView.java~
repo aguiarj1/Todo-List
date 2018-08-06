@@ -40,6 +40,8 @@ public class TodoView{
 				plist.add(description.toString(), responseArr[responseArr.length-1]); 	
 			} else if(responseArr[0].equals("view_projects")){
 				plist.view(); 
+			} else if(responseArr[0].equals("help")){
+				System.out.println("add_todo, view, quit, done, add_project, view_projects");	
 			} else {
 				System.out.println("Command does not exists"); 
 			}

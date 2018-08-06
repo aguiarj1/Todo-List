@@ -3,6 +3,11 @@
 
 # temporary files in linux
 *.swp
+
+# temporary files in windows
+*.java~
+*.java.un~
+
 # Log file
 *.log
 
